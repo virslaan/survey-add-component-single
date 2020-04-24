@@ -1,0 +1,46 @@
+div class="bg">
+    <div class="container">
+  
+      <h1 align="center" label="arial" class="heading">Survey Form</h1>
+  
+      <hr/>
+    
+  
+  
+      <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+          <label>Enter Survey Name</label>
+          <input [class.is-invalid]="surveyForm.get('surveyName').invalid &&surveyForm.get('surveyName').touched" formControlName="surveyName" type="text" class=form-control>
+        <small [class.d-none]="surveyForm.get('surveyName').valid || surveyForm.get('surveyName').untouched"class="text-danger">Survey with no survey Name is pretty uncool"</small>
+        </div>
+      <div class="form-group">
+          <label>Enter Question Name</label>
+          <input formControlName="questionText" type="text" class=form-control>
+      </div>
+  
+      <div formGroupName="choiceForm">
+                  <div class="form-group">
+                    <label>Enter Choice Here</label>
+                    <div formArrayName="optionscount" *ngFor="let optioncount in optionscount.controls;let i =index">
+                      <input type="number" class="form-control my-1" placeholder="Set option count"[formControlName]="i">
+                    </div>
+                    
+          
+          
+          
+                  <button type="button" class="btn btn-primary btn-sm m-1" (click)="addoptions()">Add Option</button>
+                  <div formArrayName="options" *ngFor="let option of options.controls;let i=index" >
+                    <input type="text" class="form-control my-1" placeholder="Write an option for survey"[formControlName]="i">
+                 
+
+        </div>
+                  
+       
+     
+     </div>
+      </div>
+
+      <button class="btn btn-success">Submit</button>
+
+    
